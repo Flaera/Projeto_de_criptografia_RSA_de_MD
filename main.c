@@ -22,7 +22,7 @@ int main()
         printf("Choiced option 1.\n");
         RulesKeysGenerating();
         printf("############################################\n");
-        printf("\tKeys generation sucessfully\n");
+        printf("\tKeys generation terminated\n");
         printf("############################################\n");
         return 0; //Make anyone of order with the option of the user.
     }
