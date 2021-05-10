@@ -73,10 +73,10 @@ LLI FastExpMod(LLI base_a, LLI power_b, LLI mod_c)
 }
 
 
-int main()
-{
-    LLI fexpmod;
-    fexpmod = FastExpMod(5, 117, 19);
-    DEBUG{printf("Fast Exp Mod: %lld\n", fexpmod);}
-    return 0;
-}
+// int main()
+// {
+//     LLI fexpmod;
+//     fexpmod = FastExpMod(5, 117, 19);
+//     DEBUG{printf("Fast Exp Mod: %lld\n", fexpmod);}
+//     return 0;
+// }

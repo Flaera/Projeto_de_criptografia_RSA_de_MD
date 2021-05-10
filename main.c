@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <math.h>
+#include <stdlib.h>
 #include "libs/opt1.h"
 #include "libs/praticace.h"
 #include "libs/math_mod.h"
@@ -24,7 +25,7 @@ void menu(){
         printf("Choice one option: ");
         scanf("%d", &option);
         
-        printf("Chosen option: %d", option);
+        printf("Chosen option: %d. Loading\n", option);
         printf("."); sleep(1);
         printf("."); sleep(1);
         printf("."); sleep(1);
@@ -32,14 +33,19 @@ void menu(){
 
         if(option == 1){
             printf("Choiced option 1.\n");
+            printf("It being:\np (cousin with q);\n");
+            printf("q (cousin with p); and\n");
+            printf("e (exponent cousin with (p-1)*(q-1)):\n");
+            printf("Digit into spaces p, q and e: ");
             RulesKeysGenerating();
             printf("############################################\n");
             printf("\tKeys generation terminated\n");
             printf("############################################\n");
-            printf("Going back to menu");
+            printf("Going back to menu.\nLoading");
             printf("."); sleep(1);
             printf("."); sleep(1);
-            printf("."); sleep(1);
+            printf("."); sleep(8);
+            printf("\n");
             clearAll();
         } else if(option == 2){
             clearAll();
@@ -50,6 +56,7 @@ void menu(){
             printf("."); sleep(1);
             printf("."); sleep(1);
             printf("."); sleep(1);
+            printf("\n");
             clearAll();
             return;
         }

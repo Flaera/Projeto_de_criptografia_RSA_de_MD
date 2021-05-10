@@ -2,6 +2,8 @@
 #define PRATICACE_H_INCLUDED
 
 
+// #include <stdio.h>
+// #include "praticace.h"
 #define ULLI unsigned long long int
 #define LLI long long int
 

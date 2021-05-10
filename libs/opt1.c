@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <math.h>
-#include "libs/praticace.h"
-#include "libs/math_mod.h"
+#include "praticace.h"
+#include "math_mod.h"
+#include "opt1.h"
 #define DEBUG1 if(0) //to inputs
 #define DEBUG2 if(0) //to process and outputs
 #define LLI long long int
@@ -17,10 +18,11 @@ void GeneratingKeys(LLI e, LLI n, LLI phi_euler)
     fprintf(file_public, "%llu\n%llu", e, n);
     int is_close_fpublic = fclose(file_public);
     
-    printf("public_key.txt: file closed (fclose)=%d\n", is_close_fpublic);
+    printf("\n");
+    printf("File saved. public_key.txt: file closed (fclose)=%d\n", is_close_fpublic);
     printf("Public key save:\n");
-    printf("e=%llu\n", e);
-    printf("n=%llu\n", n);
+    printf("\te=%llu\n", e);
+    printf("\tn=%llu\n", n);
     /*Generating private key:*/
     LLI d;
     LLI coefs[2];
@@ -37,11 +39,12 @@ void GeneratingKeys(LLI e, LLI n, LLI phi_euler)
     file_private = fopen("keys/private_key.txt", "w");
     fprintf(file_public, "%llu\n%llu", d, n);
     int is_close_fprivate = fclose(file_private);
-    printf("private_key.txt: file closed (fclose)=%d\n", is_close_fprivate);
+    // printf("\n");
+    printf("File saved. private_key.txt: file closed (fclose)=%d\n", is_close_fprivate);
     DEBUG2{
         printf("Private key save:\n");
-        printf("d=%llu\n", d);
-        printf("n=%llu\n", n);
+        printf("\td=%llu\n", d);
+        printf("\tn=%llu\n", n);
     }
     return;
 }
