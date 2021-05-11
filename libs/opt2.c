@@ -2,9 +2,10 @@
 #include<stdlib.h>
 #include<string.h>
 #include<unistd.h>
+#include "opt2.h"
 #include "math_mod.h"
 #define LLI long long int
-#define DEBUG1 if(1)
+#define DEBUG1 if(0)
 #define LEN_VEC 1000
 
 
@@ -74,11 +75,13 @@ void encrypt(){
     int intValues[strlen(message)];
     messageToInt(message, intValues);
     
-    printf("key0: %lld, key1: %lld\n", keys[0], keys[1]);
+    // printf("key0: %lld, key1: %lld\n", keys[0], keys[1]);
     messageCrypt = fopen("messageCrypt.txt", "w");
     for(int i=0; i<strlen(message); i++){
-        messageEncrypt[i] = FastExpMod(intValues[i], keys[1], keys[0]);
+        // DEBUG1{printf("int value: %d\n", intValues[i]);}
+        messageEncrypt[i] = FastExpMod(intValues[i], keys[0], keys[1]);
         fprintf(messageCrypt, "%lld\n", messageEncrypt[i]);
+        // DEBUG1{printf("Value encrypted: %lld\n", messageEncrypt[i]);}
     }
     
     fclose(messageCrypt);

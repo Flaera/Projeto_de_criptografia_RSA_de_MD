@@ -1,5 +1,5 @@
-#ifndef MATH_MOD_H_INCLEDED
-#define MATH_MOD_H_INCLEDED
+#ifndef MATH_MOD_H_INCLUDED
+#define MATH_MOD_H_INCLUDED
 
 
 #define LLI long long int
@@ -27,4 +27,4 @@ It's value of return of this function;
 NOTE: It no use litle theorem of fermat.
 */
 
-#endif // MATH_H_MOD_INCLEDED
+#endif // MATH_MOD_H_INCLUDED
