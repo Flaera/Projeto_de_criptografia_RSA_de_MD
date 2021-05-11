@@ -37,11 +37,11 @@ LLI BinaryConvertion(LLI n, int vec[], int len)
     }
     vec[acc] = n;
     DEBUG{
-        int acc1=0;
-        while(vec[acc1]!=-1)
+        int acc1=acc;
+        while(acc1!=-1)//(vec[acc1]!=-1)
         {
             printf("%d", vec[acc1]);
-            acc1 += 1;
+            acc1 -= 1;
         }
         printf("\n");
     }
@@ -49,34 +49,29 @@ LLI BinaryConvertion(LLI n, int vec[], int len)
 }
 
 
-LLI FastExpMod(LLI base_a, LLI power_b, LLI mod_c)
+LLI FastExpMod(LLI base_a, LLI exp_b, LLI mod_c)
 {
-    LLI scrap = 1;
     int binary_number[LEN_VEC];
-    int len = BinaryConvertion(power_b, binary_number, LEN_VEC);
+    int len = BinaryConvertion(exp_b, binary_number, LEN_VEC);
     
-    // LLI powers[len];
-    for (int i=len; i>=0; --i)
+    LLI scrap = 1;
+    for (int j=0; j<=len; ++j)
     {
-        if (binary_number[i]==1)
+        if (binary_number[j]==1)
         {
-            scrap *= Module(scrap, mod_c);//(Module(pow(2, len-i), mod_c));
-            DEBUG{printf("binary_n: %d, index: %d, scrap: %lld\n",
-            binary_number[len-i], len-i, scrap);}
+            scrap = scrap*Module(base_a, mod_c);
         }
-        base_a *= base_a;
-        // DEBUG{printf("binary: %d, power: %lld, index: %d\n",
-        //  binary_number[i], powers[len-i], len-i);}
+        base_a = base_a * Module(base_a, mod_c);
     }
-    // scrap = Module(scrap, mod_c);
-    return scrap;
+    
+    return Module(scrap, mod_c);
 }
 
 
 // int main()
 // {
 //     LLI fexpmod;
-//     fexpmod = FastExpMod(5, 117, 19);
+//     fexpmod = FastExpMod(64, 7, 187); //devolve 1
 //     DEBUG{printf("Fast Exp Mod: %lld\n", fexpmod);}
 //     return 0;
 // }

@@ -24,7 +24,7 @@ LLI FastExpMod(LLI base_a, LLI power_b, LLI mod_c);
 /*
 It make the fast exponeation modular.
 It's value of return of this function;
+NOTE: It no use litle theorem of fermat.
 */
-
 
 #endif // MATH_H_MOD_INCLEDED
