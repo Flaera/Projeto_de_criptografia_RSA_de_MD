@@ -1,4 +1,5 @@
 To run this project type in terminal or console:
 
+First, enter in folder of program. After, type the comand below:
 gcc OnlyFile.c -lm -o run -Wall && ./run
 
