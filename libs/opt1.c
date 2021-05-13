@@ -14,7 +14,7 @@
 void GeneratingKeys(LLI e, LLI n, LLI phi_euler)
 {
     FILE *file_public;
-    file_public = fopen("keys/public_key.txt", "w");
+    file_public = fopen("/home/flaera/Projeto_de_criptografia_RSA_de_MD/keys/public_key.txt", "w");
     fprintf(file_public, "%llu\n%llu", e, n);
     int is_close_fpublic = fclose(file_public);
     
@@ -36,7 +36,7 @@ void GeneratingKeys(LLI e, LLI n, LLI phi_euler)
     d = soluctions[0];
     DEBUG2{printf("d = %llu.\n", d);}
     FILE *file_private;
-    file_private = fopen("keys/private_key.txt", "w");
+    file_private = fopen("/home/flaera/Projeto_de_criptografia_RSA_de_MD/keys/private_key.txt", "w");
     fprintf(file_public, "%llu\n%llu", d, n);
     int is_close_fprivate = fclose(file_private);
     // printf("\n");
@@ -61,7 +61,12 @@ int RulesKeysGenerating()
     LLI p, q, e;
     LLI n, phi_euler;
 
+    printf("It being:\np (cousin with q);\n");
+    printf("q (cousin with p); and\n");
+    printf("e (exponent cousin with (p-1)*(q-1)):\n");
+    printf("Digit into spaces p, q and e: ");
     scanf("%lld %lld %lld", &p, &q, &e);
+    getchar();
     phi_euler = (p-1)*(q-1);
     if (IsPrimo(p)!=1 && IsPrimo(q)!=1)
     {

@@ -3,7 +3,7 @@
 #include <math.h>
 #include <time.h>
 #include "math_mod.h"
-#define DEBUG if(0)
+#define DEBUG if(1)
 #define ULLI unsigned long long int
 #define LLI long long int
 #define LEN_VEC 1000
@@ -72,7 +72,7 @@ LLI FastExpMod(LLI base_a, LLI exp_b, LLI mod_c)
 // int main()
 // {
 //     LLI fexpmod;
-//     fexpmod = FastExpMod(4, 23, 187); //devolve 1
+//     fexpmod = FastExpMod(11, 27, 55); //devolve 1
 //     DEBUG{printf("Fast Exp Mod: %lld\n", fexpmod);}
 //     return 0;
 // }

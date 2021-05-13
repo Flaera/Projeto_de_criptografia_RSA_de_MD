@@ -60,10 +60,6 @@ void menu(){
 
         if(option == 1){
             printf("Choiced option 1.\n");
-            printf("It being:\np (cousin with q);\n");
-            printf("q (cousin with p); and\n");
-            printf("e (exponent cousin with (p-1)*(q-1)):\n");
-            printf("Digit into spaces p, q and e: ");
             RulesKeysGenerating();
             ShowResult("Keys generation terminated");
             printf("Going back to menu.\nLoading");
