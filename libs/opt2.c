@@ -8,9 +8,12 @@
 #define DEBUG1 if(0)
 #define LEN_VEC 1000
 
-char IntToChar(int letter){
-    if(letter == 28) return 32;
-    else return letter+63;
+int charToInt(char letter){
+    if(letter == 32) return 28;
+    
+    if(letter>=97 && letter<=122) letter -= 95;
+    else if(letter>= 65 && letter<=90) letter -= 63;
+    return letter;
 }
 
 void messageToInt(char *message, int intValues[]){
