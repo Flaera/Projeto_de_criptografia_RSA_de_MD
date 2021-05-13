@@ -1,4 +1,0 @@
-To run this project type in terminal or console:
-
-gcc OnlyFile.c -lm -o run -Wall && ./run
-
