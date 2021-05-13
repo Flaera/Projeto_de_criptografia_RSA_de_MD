@@ -317,27 +317,28 @@ void inputMessage(char * message) {
 }
 
 int inputKeys(LLI keys[2]) {
-  int chave1, chave2;
+  LLI chave1, chave2;
   FILE * public;
 
   public = fopen("public_key.txt", "r");
-  fscanf(public, "%d\n%d", & chave1, & chave2);
+  fscanf(public, "%lld\n%lld", & chave1, & chave2);
   fclose(public);
 
   printf("\nEnter with the public key pair generated before:\n");
   scanf("%lld %lld", & keys[0], & keys[1]);
+  //printf("%lld %lld", keys[0], keys[1]);
   getchar();
   if (keys[0] == chave1 && keys[1] == chave2) {
     //printf("Correct keys, going to encrypt.\n");
     return 1;
   } else {
     printf("Incorrect keys, check the public file in paste keys directory.\n");
-    printf("Going back to menu.\n");
+    printf("Going back to menu.\n\n");
     return 0;
   }
 }
 
-LLI MEA(LLI a, LLI b, LLI c) {
+ULLI MEA(ULLI a, ULLI b, ULLI c) {
   if (b == 0) return 1;
   else if (b % 2 == 0) {
     LLI d = MEA(a, b / 2, c);
@@ -350,12 +351,11 @@ LLI MEA(LLI a, LLI b, LLI c) {
 void encrypt() {
   FILE * messageCrypt;
   char message[10000];
-  int messageEncrypt[10000];
+  LLI messageEncrypt[10000];
   LLI keys[2];
   inputMessage(message);
 
   int state_input_keys = inputKeys(keys);
-
   if (state_input_keys == 0) return;
 
   LLI intValues[strlen(message)];
@@ -364,20 +364,20 @@ void encrypt() {
   messageCrypt = fopen("messageCrypt.txt", "w");
   int len_str = strlen(message);
   for (int i = 0; i < len_str; i++){
-    LLI fast_exp_return = MEA(intValues[i], keys[0], keys[1]);
+    ULLI fast_exp_return = MEA(intValues[i], keys[0], keys[1]);
+    //printf("a: %lld b: %lld mod: %lld res: %llu\n", intValues[i], keys[0], keys[1], fast_exp_return);
     messageEncrypt[i] = fast_exp_return;
-    fprintf(messageCrypt, "%d ", messageEncrypt[i]);
+    fprintf(messageCrypt, "%lld ", messageEncrypt[i]);
   }
   fclose(messageCrypt);
   //printf("File saved: messageCrypt.txt: file_closed: %d.\n", status_encrypt);
-  printf("\nFile saved: messageCrypt.txt\n");
-
-  printf("Message encrypted: ");
-  int acc = 0;
-  while (acc < len_str) {
-    printf("%d ", messageEncrypt[acc]);
-    acc += 1;
-  }
+  printf("File saved: messageCrypt.txt\n");
+  printf("Message encrypted.");
+  // int acc = 0;
+  // while (acc < len_str) {
+  //   printf("%lld ", messageEncrypt[acc]);
+  //   acc += 1;
+  // }
   printf("\n\n");
 }
 
@@ -397,12 +397,12 @@ int ReadFileMessage(LLI message[]) {
     acc = acc + 1;
   }
 
-  printf("Message encrypted in file messageCrypt.txt: ");
-  for (int i = 0; i < acc - 1; ++i) {
-    if (i==acc-2) {printf("%lld.", message[i]);}
-    else {printf("%lld ", message[i]);}
-  }
-  printf("\nLength message: %d.\n", acc - 1);
+  // printf("Message encrypted in file messageCrypt.txt: ");
+  // for (int i = 0; i < acc - 1; ++i) {
+  //   if (i==acc-2) {printf("%lld.", message[i]);}
+  //   else {printf("%lld ", message[i]);}
+  // }
+  // printf("\nLength message: %d.\n", acc - 1);
   fclose(encrypted_file);
   return acc - 1;
 }
@@ -439,21 +439,20 @@ void Decrypt() {
 
   file_decrypted = fopen("messageDecrypt.txt", "w");
   for (int i = 0; i < len; i++) {
-    LLI fast_exp_return = MEA(message_encrypted[i], keys[0], keys[1]);
-    DEBUG{printf("fast_exp_return: %lld\n", fast_exp_return);}
+    ULLI fast_exp_return = MEA(message_encrypted[i], keys[0], keys[1]);
+    //DEBUG{printf("fast_exp_return: %lld\n", fast_exp_return);}
     message_decrypted[i] = (char) IntToChar(fast_exp_return);
     fprintf(file_decrypted, "%c", message_decrypted[i]);
   }
   fclose(file_decrypted);
-  printf("\nFile saved: messageDecrypted.txt\n");
-  printf("Message decrypted:\n");
-  int acc = 0;
-  while (acc < len) {
-    if (acc!=len-1) {printf("%c", message_decrypted[acc]);}
-    else {printf("%c.", message_decrypted[acc]);}
-    acc += 1;
-  }
-  printf("\n\n");
+  printf("File saved: messageDecrypted.txt\n");
+  printf("Message decrypted.\n\n");
+  // int acc = 0;
+  // while (acc < len) {
+  //   if (acc!=len-1) {printf("%c", message_decrypted[acc]);}
+  //   else {printf("%c.", message_decrypted[acc]);}
+  //   acc += 1;
+  // }
 }
 
 void menu() {
