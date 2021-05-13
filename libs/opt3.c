@@ -10,13 +10,8 @@
 
 
 char IntToChar(int letter){
-    if(letter>=97 && letter<=122)
-    {
-        letter -= 32; //Se for minuscula, deixo maiuscula
-    }
-    if(letter == 28) {letter = ' ';}
-    // else {return letter-95;} Old way to [65:91], from greats for lowers
-    return letter;
+    if(letter == 28) return 32;
+    else return letter+63;
 }
 
 
