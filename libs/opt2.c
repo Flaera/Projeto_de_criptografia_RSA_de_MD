@@ -8,17 +8,10 @@
 #define DEBUG1 if(0)
 #define LEN_VEC 1000
 
-
-int charToInt(char letter){
-    if(letter>=97 && letter<=122)
-    {
-        letter -= 32; //Se for minuscula, deixo maiuscula
-    }
-    if(letter == 32) {letter = 28;}
-    // else {return letter-95;} Old way to [65:91], from greats for lowers
-    return letter;
+char IntToChar(int letter){
+    if(letter == 28) return 32;
+    else return letter+63;
 }
-
 
 void messageToInt(char *message, int intValues[]){
     for(int i=0; i<strlen(message); i++) intValues[i] = charToInt(message[i]);
