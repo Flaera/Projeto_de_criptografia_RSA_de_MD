@@ -332,13 +332,13 @@ int inputKeys(LLI keys[2]) {
     //printf("Correct keys, going to encrypt.\n");
     return 1;
   } else {
-    printf("Incorrect keys, check the public file in paste keys directory.\n");
+    printf("Incorrect keys, check the public file in main directory.\n");
     printf("Going back to menu.\n\n");
     return 0;
   }
 }
 
-ULLI MEA(ULLI a, ULLI b, ULLI c) {
+LLI MEA(LLI a, LLI b, LLI c) {
   if (b == 0) return 1;
   else if (b % 2 == 0) {
     LLI d = MEA(a, b / 2, c);
@@ -364,7 +364,7 @@ void encrypt() {
   messageCrypt = fopen("messageCrypt.txt", "w");
   int len_str = strlen(message);
   for (int i = 0; i < len_str; i++){
-    ULLI fast_exp_return = MEA(intValues[i], keys[0], keys[1]);
+    LLI fast_exp_return = MEA(intValues[i], keys[0], keys[1]);
     //printf("a: %lld b: %lld mod: %lld res: %llu\n", intValues[i], keys[0], keys[1], fast_exp_return);
     messageEncrypt[i] = fast_exp_return;
     fprintf(messageCrypt, "%lld ", messageEncrypt[i]);
@@ -439,7 +439,7 @@ void Decrypt() {
 
   file_decrypted = fopen("messageDecrypt.txt", "w");
   for (int i = 0; i < len; i++) {
-    ULLI fast_exp_return = MEA(message_encrypted[i], keys[0], keys[1]);
+    LLI fast_exp_return = MEA(message_encrypted[i], keys[0], keys[1]);
     //DEBUG{printf("fast_exp_return: %lld\n", fast_exp_return);}
     message_decrypted[i] = (char) IntToChar(fast_exp_return);
     fprintf(file_decrypted, "%c", message_decrypted[i]);
