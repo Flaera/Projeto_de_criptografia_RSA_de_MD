@@ -6,6 +6,7 @@
 #include <math.h>
 #include <string.h>
 
+#define DEBUG if(1)
 #define ULLI unsigned long long int
 #define LLI long long int
 
@@ -163,13 +164,15 @@ int CongruSoluctions(LLI a, LLI b, LLI m, LLI coef[], LLI solu[]) {
     solu[0] = x;
     return 1;
   } else if ((mdc > 1) && (b % mdc == 0)) {
-    LLI a1, m1, mdc1, b1;
+    // LLI a1, m1, mdc1, b1; //retired the var mdc1
+    LLI a1, m1, b1;
     LLI coef2[2];
 
     a1 = a / mdc;
     b1 = b / mdc;
     m1 = m / mdc;
-    mdc1 = SearchSTMDC(a1, m1, coef2);
+    // mdc1 = SearchSTMDC(a1, m1, coef2); retired the var mdc1
+    SearchSTMDC(a1, m1, coef2);
 
     LLI x = b1 * coef2[0];
     while (x < 0) x = x + m1;
@@ -247,7 +250,7 @@ void GeneratingKeys(LLI e, LLI n, LLI phi_euler) {
   FILE * file_public;
   file_public = fopen("public_key.txt", "w");
   fprintf(file_public, "%llu\n%llu", e, n);
-  int is_close_fpublic = fclose(file_public);
+  fclose(file_public);
 
   printf("\n");
   printf("Public key: ");
@@ -255,12 +258,12 @@ void GeneratingKeys(LLI e, LLI n, LLI phi_euler) {
   LLI d;
   LLI coefs[2];
   LLI soluctions[10000];
-  LLI type_congru = CongruSoluctions(e, 1, phi_euler, coefs, soluctions);
+  CongruSoluctions(e, 1, phi_euler, coefs, soluctions);
   d = soluctions[0];
   FILE * file_private;
   file_private = fopen("private_key.txt", "w");
   fprintf(file_public, "%llu\n%llu", d, n);
-  int is_close_fprivate = fclose(file_private);
+  fclose(file_private);
   printf("Files saved: private_key.txt, public_key.txt\n\n");
   return;
 }
@@ -365,7 +368,7 @@ void encrypt() {
     messageEncrypt[i] = fast_exp_return;
     fprintf(messageCrypt, "%d ", messageEncrypt[i]);
   }
-  int status_encrypt = fclose(messageCrypt);
+  fclose(messageCrypt);
   //printf("File saved: messageCrypt.txt: file_closed: %d.\n", status_encrypt);
   printf("\nFile saved: messageCrypt.txt\n");
 
@@ -394,11 +397,12 @@ int ReadFileMessage(LLI message[]) {
     acc = acc + 1;
   }
 
-  printf("Message decrypted: - ");
+  printf("Message encrypted in file messageCrypt.txt: ");
   for (int i = 0; i < acc - 1; ++i) {
-    printf("%lld ", message[i]);
+    if (i==acc-2) {printf("%lld.", message[i]);}
+    else {printf("%lld ", message[i]);}
   }
-  printf(" - length: %d\n", acc - 1);
+  printf("\nLength message: %d.\n", acc - 1);
   fclose(encrypted_file);
   return acc - 1;
 }
@@ -409,7 +413,7 @@ int ReadFileKeys(LLI keys[2]) {
 
   private = fopen("private_key.txt","r");
   if (private == NULL) {
-    printf("File not found. Check the private file in keys directory.\n");
+    printf("File not found. Check the private file in main directory.\n");
     printf("Going back to menu.\n");
   }
 
@@ -436,16 +440,17 @@ void Decrypt() {
   file_decrypted = fopen("messageDecrypt.txt", "w");
   for (int i = 0; i < len; i++) {
     LLI fast_exp_return = MEA(message_encrypted[i], keys[0], keys[1]);
+    DEBUG{printf("fast_exp_return: %lld\n", fast_exp_return);}
     message_decrypted[i] = (char) IntToChar(fast_exp_return);
-    fprintf(file_decrypted, "%c", message_encrypted[i]);
+    fprintf(file_decrypted, "%c", message_decrypted[i]);
   }
-  int status_encrypt = fclose(file_decrypted);
-  //printf("Message translated with sucessfully.\n");
+  fclose(file_decrypted);
   printf("\nFile saved: messageDecrypted.txt\n");
   printf("Message decrypted:\n");
   int acc = 0;
   while (acc < len) {
-    printf("%c", message_decrypted[acc]);
+    if (acc!=len-1) {printf("%c", message_decrypted[acc]);}
+    else {printf("%c.", message_decrypted[acc]);}
     acc += 1;
   }
   printf("\n\n");
@@ -459,7 +464,7 @@ void menu() {
     printf("1 - To generate the public and private key.\n");
     printf("2 - To encode.\n");
     printf("3 - To decode.\n");
-    printf("4 - To exit\n\n");
+    printf("4 - To exit.\n\n");
     printf("Choice one option: ");
     scanf("%d", & option);
     getchar();
@@ -471,7 +476,7 @@ void menu() {
     } else if (option == 3) {
       Decrypt();
     } else if (option == 4) {
-      printf("Leaving, bye\n");
+      printf("Leaving, bye!\n");
       return;
     }
   }
