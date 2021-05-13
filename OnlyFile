@@ -305,7 +305,7 @@ int charToInt(char letter) {
 void messageToInt(char * message, LLI intValues[]) {
   for (int i = 0; i < strlen(message); i++){
     intValues[i] = charToInt(message[i]);
-    printf("%d ", intValues[i]);
+    //printf("%d ", intValues[i]);
   }
   printf("\n");
 }
@@ -337,7 +337,7 @@ int inputKeys(LLI keys[2]) {
   }
 }
 
-/* LLI MEA(LLI a, LLI b, LLI c) {
+LLI MEA(LLI a, LLI b, LLI c) {
   if (b == 0) return 1;
   else if (b % 2 == 0) {
     LLI d = MEA(a, b / 2, c);
@@ -345,9 +345,9 @@ int inputKeys(LLI keys[2]) {
   } else {
     return ((a % c) * MEA(a, b - 1, c)) % c;
   }
-} */
+}
 
-LLI MEA(LLI p, LLI e, LLI n){
+/*LLI MEA(LLI p, LLI e, LLI n){
   LLI r2 = 1;
   LLI r1 = 0;
   LLI Q = 0;
@@ -366,7 +366,7 @@ LLI MEA(LLI p, LLI e, LLI n){
      e = Q;
   }
   return r2;
-}
+}*/
 
 void encrypt() {
   FILE * messageCrypt;
@@ -386,7 +386,7 @@ void encrypt() {
   int len_str = strlen(message);
   for (int i = 0; i < len_str; i++){
     LLI fast_exp_return = MEA(intValues[i], keys[0], keys[1]);
-    printf("%lld teste\n", fast_exp_return);
+    //printf("%lld teste\n", fast_exp_return);
     messageEncrypt[i] = fast_exp_return;
     fprintf(messageCrypt, "%d ", messageEncrypt[i]);
   }
@@ -462,7 +462,7 @@ void Decrypt() {
   file_decrypted = fopen("messageDecrypt.txt", "w");
   for (int i = 0; i < len; i++) {
     LLI fast_exp_return = MEA(message_encrypted[i], keys[0], keys[1]);
-    printf("%d teste\n", fast_exp_return);
+    //printf("%d teste\n", fast_exp_return);
     message_decrypted[i] = (char) IntToChar(fast_exp_return);
     fprintf(file_decrypted, "%c", message_encrypted[i]);
   }
