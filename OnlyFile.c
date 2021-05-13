@@ -250,7 +250,6 @@ void GeneratingKeys(LLI e, LLI n, LLI phi_euler) {
   int is_close_fpublic = fclose(file_public);
 
   printf("\n");
-  //printf("File saved. public_key.txt: file closed (fclose)=%d\n", is_close_fpublic);
   printf("Public key: ");
   printf("e = %llu, n = %llu;\n", e, n);
   LLI d;
@@ -263,7 +262,6 @@ void GeneratingKeys(LLI e, LLI n, LLI phi_euler) {
   fprintf(file_public, "%llu\n%llu", d, n);
   int is_close_fprivate = fclose(file_private);
   printf("Files saved: private_key.txt, public_key.txt\n\n");
-  //printf("File saved. private_key.txt: file closed (fclose)=%d\n", is_close_fprivate);
   return;
 }
 
@@ -305,7 +303,6 @@ int charToInt(char letter) {
 void messageToInt(char * message, LLI intValues[]) {
   for (int i = 0; i < strlen(message); i++){
     intValues[i] = charToInt(message[i]);
-    //printf("%d ", intValues[i]);
   }
   printf("\n");
 }
@@ -347,27 +344,6 @@ LLI MEA(LLI a, LLI b, LLI c) {
   }
 }
 
-/*LLI MEA(LLI p, LLI e, LLI n){
-  LLI r2 = 1;
-  LLI r1 = 0;
-  LLI Q = 0;
-  LLI R = 0;
- 
-  while( e != 0 ){
-     R = (e % 2);
-     Q = ((e - R) / 2);
- 
-     r1 = ((p * p) % n);
- 
-       if(R == 1){
-          r2 = ((r2 * p) % n);
-       }
-     p = r1;
-     e = Q;
-  }
-  return r2;
-}*/
-
 void encrypt() {
   FILE * messageCrypt;
   char message[10000];
@@ -386,12 +362,10 @@ void encrypt() {
   int len_str = strlen(message);
   for (int i = 0; i < len_str; i++){
     LLI fast_exp_return = MEA(intValues[i], keys[0], keys[1]);
-    //printf("%lld teste\n", fast_exp_return);
     messageEncrypt[i] = fast_exp_return;
     fprintf(messageCrypt, "%d ", messageEncrypt[i]);
   }
   int status_encrypt = fclose(messageCrypt);
-  //printf("Message encrypted with sucessfully.\n");
   //printf("File saved: messageCrypt.txt: file_closed: %d.\n", status_encrypt);
   printf("\nFile saved: messageCrypt.txt\n");
 
@@ -409,20 +383,20 @@ char IntToChar(int letter) {
   else return (char)(63) + letter;
 }
 
-int ReadFileMessage(int message[]) {
+int ReadFileMessage(LLI message[]) {
   FILE * encrypted_file;
   encrypted_file = fopen("messageCrypt.txt", "r");
 
   int acc = 0;
   int status = 1;
   while (status != EOF) {
-    status = fscanf(encrypted_file, "%d", & message[acc]);
+    status = fscanf(encrypted_file, "%lld", & message[acc]);
     acc = acc + 1;
   }
 
   printf("Message decrypted: - ");
   for (int i = 0; i < acc - 1; ++i) {
-    printf("%d ", message[i]);
+    printf("%lld ", message[i]);
   }
   printf(" - length: %d\n", acc - 1);
   fclose(encrypted_file);
@@ -430,7 +404,7 @@ int ReadFileMessage(int message[]) {
 }
 
 int ReadFileKeys(LLI keys[2]) {
-  int chave1, chave2;
+  LLI chave1, chave2;
   FILE * private;
 
   private = fopen("private_key.txt","r");
@@ -439,7 +413,7 @@ int ReadFileKeys(LLI keys[2]) {
     printf("Going back to menu.\n");
   }
 
-  fscanf(private, "%d\n%d", & chave1, & chave2);
+  fscanf(private, "%lld\n%lld", & chave1, & chave2);
   keys[0] = chave1;
   keys[1] = chave2;
   fclose(private);
@@ -449,7 +423,7 @@ int ReadFileKeys(LLI keys[2]) {
 
 void Decrypt() {
   FILE * file_decrypted;
-  int message_encrypted[10000];
+  LLI message_encrypted[10000];
   char message_decrypted[10000];
   LLI keys[2];
 
@@ -462,7 +436,6 @@ void Decrypt() {
   file_decrypted = fopen("messageDecrypt.txt", "w");
   for (int i = 0; i < len; i++) {
     LLI fast_exp_return = MEA(message_encrypted[i], keys[0], keys[1]);
-    //printf("%d teste\n", fast_exp_return);
     message_decrypted[i] = (char) IntToChar(fast_exp_return);
     fprintf(file_decrypted, "%c", message_encrypted[i]);
   }
@@ -493,13 +466,10 @@ void menu() {
     clearAll();
     if (option == 1) {
       RulesKeysGenerating();
-      //ShowResult("Keys generation terminated");
     } else if (option == 2) {
       encrypt();
-      //ShowResult("Encryptation terminated");
     } else if (option == 3) {
       Decrypt();
-      //ShowResult("Decryptation terminated");
     } else if (option == 4) {
       printf("Leaving, bye\n");
       return;
