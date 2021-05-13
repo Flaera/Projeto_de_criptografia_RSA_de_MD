@@ -1,10 +1,4 @@
-Para executar este projeto em Linux distros:
-gcc main.c praticace.o math_mod.o opt1.o -lm -o main -Wall
-./main
+To run this project type in terminal or console:
 
-Para executar em Windows, digite os comandos no cmd...
- dentro da pasta do projeto (Pode não funcionar, alguém
-  que usa Windows testa pra mim, por favor):
-gcc main.c praticace.o math_mod.o opt1.o -lm -o main -Wall
-./main.out
+gcc OnlyFile.c -lm -o run -Wall && ./run
 
