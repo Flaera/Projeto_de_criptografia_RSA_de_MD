@@ -1,5 +1,6 @@
-To run this project type in terminal or console:
+To run this project in terminal or console:
 
-First, enter in folder of program. After, type the comand below:
-gcc OnlyFile.c -lm -o run -Wall && ./run
+1st - Enter in the folder of program. 
+2nd - Type the comand below:
+        gcc OnlyFile.c -lm -o run -Wall && ./run
 
