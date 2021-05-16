@@ -1,8 +1,19 @@
-To run this project in terminal or console:
+English:
+        To run this project in terminal or console:
 
-1st - Enter in the folder of program. 
-2nd - Type the comand below:
-        gcc OnlyFile.c -lm -o run -Wall && ./run
-3rd - Choose your option.
+        1st - Enter in the folder of program. 
+        2nd - Type the comand below:
+                gcc OnlyFile.c -lm -o run -Wall && ./run
+        3rd - Choose your option.
 
-PS: To decode a custom message you should copy the encode message and paste into the file "messageCrypt.txt" and save, then choose option 3 in the menu.
+        PS: To decode a custom message you should copy the encode message and paste into the file "messageCrypt.txt" and save, then choose option 3 in the menu.
+
+Português:
+        Para rodar o projeto no terminal/console:
+
+        1° - Acesse a pasta dos arquivos do projeto.
+        2° - Digite o comando abaixo no terminar/console:
+                gcc OnlyFile.c -lm -o run -Wall && ./run
+        3° - Escolha a opção desejada.
+
+        OBS: Para decriptar uma mensagem customizada, você deve copiar e colar a mensagem criptografada dentro do arquivo "messageCrypt.txt" e salvar. Após isso escolha a opção 3.
