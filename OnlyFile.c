@@ -272,7 +272,7 @@ int RulesKeysGenerating() {
   LLI p, q, e;
   LLI n, phi_euler;
 
-  printf("It being:\np and q (cousins to each other)\n");
+  printf("Input:\np and q (cousins to each other)\n");
   printf("e (exponent cousin with (p-1)*(q-1))\n");
   printf("\nDigit into spaces p, q and e:\n");
   scanf("%lld %lld %lld", & p, & q, & e);
