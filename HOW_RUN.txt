@@ -3,4 +3,6 @@ To run this project in terminal or console:
 1st - Enter in the folder of program. 
 2nd - Type the comand below:
         gcc OnlyFile.c -lm -o run -Wall && ./run
+3rd - Choose your option.
 
+PS: To decode a custom message you should copy the encode message and paste into the file "messageCrypt.txt" and save, then choose option 3 in the menu.
