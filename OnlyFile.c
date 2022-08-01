@@ -483,5 +483,6 @@ void menu() {
 
 int main() {
   menu();
+  printf("Test git remote via VSCODE");
   return 0;
 }
